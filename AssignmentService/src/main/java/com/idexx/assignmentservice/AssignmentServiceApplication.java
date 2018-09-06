@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AssignmentServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AssignmentServiceApplication.class, args);
+        SpringApplication.run(AssignmentServiceApplication.class);
     }
 }
