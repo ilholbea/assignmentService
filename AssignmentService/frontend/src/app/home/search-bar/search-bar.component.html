@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="search-input-form" [formGroup]="searchForm">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Search..." formControlName="searchInputFormControl">
+      </mat-form-field>
+    </form>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="search()" type="submit" [disabled]="!searchForm.valid">
+        Search
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

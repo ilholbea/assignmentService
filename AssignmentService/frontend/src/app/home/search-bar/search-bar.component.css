@@ -1,0 +1,14 @@
+.search-input-form {
+  min-width: 150px;
+  max-width: 90%;
+  width: 100%;
+  display: inline-block;
+}
+
+.full-width {
+  width: 100%;
+}
+
+#searchButton {
+  display: inline-block;
+}
