@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RestApi} from "../../service/rest-api";
+import {ExternalResponse} from "../../model/external-response";
 
 @Component({
   selector: 'app-search-bar',
@@ -8,8 +9,12 @@ import {RestApi} from "../../service/rest-api";
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
-  result: string;
+  googleApiCallResults: ExternalResponse[];
+  iTunesApiCallResults: ExternalResponse[];
   searchForm: FormGroup;
+  googleCheckBox: boolean = true;
+  iTunesCheckBox: boolean = true;
+  noResultsMessage: string = 'The search has not returned any results';
 
   constructor(private formBuilder: FormBuilder, private restApi: RestApi) {
   }
@@ -21,12 +26,22 @@ export class SearchBarComponent implements OnInit {
   }
 
   search() {
-    this.restApi.getResultsFromBackEnd(this.searchForm.value.searchInputFormControl).subscribe(
-      data => {
-        this.result = data;
-        console.log(this.result);
-      }
-    )
+    this.googleApiCallResults = [];
+    this.iTunesApiCallResults = [];
+    if (this.googleCheckBox === true) {
+      this.restApi.getResultsFromBackendGoogle(this.searchForm.value.searchInputFormControl).subscribe(
+        data => {
+          this.googleApiCallResults = data;
+        }
+      )
+    }
+    if (this.iTunesCheckBox === true) {
+      this.restApi.getResultsFromBackendiTunes(this.searchForm.value.searchInputFormControl).subscribe(
+        data => {
+          this.iTunesApiCallResults = data;
+        }
+      )
+    }
   }
 
 

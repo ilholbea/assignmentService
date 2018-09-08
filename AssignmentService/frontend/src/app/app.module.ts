@@ -8,7 +8,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SearchBarComponent} from './home/search-bar/search-bar.component';
 import {RestApi} from "./service/rest-api";
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule,} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTabsModule,
+} from '@angular/material';
 
 const routes = [{
   path: 'home',
@@ -37,7 +44,9 @@ const routes = [{
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatTabsModule
   ],
   providers: [RestApi],
   bootstrap: [AppComponent]
