@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {ExternalResponse} from "../model/external-response";
+import {User} from "../model/user";
 
 @Injectable()
 export class RestApi {
@@ -30,6 +31,22 @@ export class RestApi {
           error => console.log(error)
         )
       )
+  }
+
+  getAll() {
+    return this.http.get<User[]>('/api/users');
+  }
+
+  getById(id: number) {
+    return this.http.get('/api/users/' + id);
+  }
+
+  create(user: User) {
+    return this.http.post('/api/users', user);
+  }
+
+  update(user: User) {
+    return this.http.put('/api/users/' + user.id, user);
   }
 
 }

@@ -1,19 +1,19 @@
+.checkBox {
+  margin-left: 10px;
+}
+
+.searchButton {
+  margin-left: 10px;
+  display: inline;
+}
+
 .search-input-form {
   min-width: 150px;
-  max-width: 90%;
+  max-width: 100%;
   width: 100%;
-  display: inline-block;
 }
 
 .full-width {
-  width: 100%;
+  width: 94%;
 }
 
-#searchButton {
-  display: inline-block;
-}
-
-img {
-  height: 50px;
-  width: 50px;
-}

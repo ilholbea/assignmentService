@@ -1,29 +1,26 @@
-<mat-card>
-  <mat-card-header>
-  </mat-card-header>
+<mat-card class="searchBarWrapper">
   <mat-card-content>
     <form class="search-input-form" [formGroup]="searchForm">
       <mat-form-field class="full-width">
         <input matInput placeholder="Search..." formControlName="searchInputFormControl">
       </mat-form-field>
-    </form>
-    <section>
-      <span>Search on:</span>
-      <mat-checkbox class="example-margin" [(ngModel)]="googleCheckBox">Google</mat-checkbox>
-      <mat-checkbox class="example-margin" [(ngModel)]="iTunesCheckBox">iTunes</mat-checkbox>
-    </section>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="search()" type="submit" [disabled]="!searchForm.valid">
+      <button class="searchButton" mat-raised-button color="primary" (click)="search()" type="submit"
+              [disabled]="!searchForm.valid || (googleCheckBox=== false && iTunesCheckBox === false)">
         Search
       </button>
-    </mat-card-actions>
+    </form>
+    <section>
+      <span>Search on:   </span>
+      <mat-checkbox class="checkBox" [(ngModel)]="googleCheckBox">Google</mat-checkbox>
+      <mat-checkbox class="checkBox" [(ngModel)]="iTunesCheckBox">iTunes</mat-checkbox>
+    </section>
   </mat-card-content>
 </mat-card>
 
 <mat-card *ngIf="googleApiCallResults !== undefined || iTunesApiCallResults !== undefined">
   <mat-card-content>
     <mat-tab-group>
-      <mat-tab label="Google">
+      <mat-tab label="Google" *ngIf="googleCheckBox">
         <mat-card *ngFor="let item of googleApiCallResults">
           <mat-card-header>
             <div mat-card-avatar></div>
@@ -34,9 +31,9 @@
           <mat-card-content>
           </mat-card-content>
         </mat-card>
-        <span class="message" *ngIf="googleApiCallResults.length===0">{{noResultsMessage}}</span>
+        <span class="message" *ngIf="googleApiCallResults.length===0">{{googleMessage}}</span>
       </mat-tab>
-      <mat-tab label="iTunes">
+      <mat-tab label="iTunes" *ngIf="iTunesCheckBox">
         <mat-card *ngFor="let item of iTunesApiCallResults">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
@@ -47,7 +44,7 @@
           <mat-card-content>
           </mat-card-content>
         </mat-card>
-        <span class="message" *ngIf="iTunesApiCallResults.length===0">{{noResultsMessage}}</span>
+        <span class="message" *ngIf="iTunesApiCallResults.length===0">{{iTunesMessage}}</span>
       </mat-tab>
     </mat-tab-group>
   </mat-card-content>

@@ -14,7 +14,8 @@ export class SearchBarComponent implements OnInit {
   searchForm: FormGroup;
   googleCheckBox: boolean = true;
   iTunesCheckBox: boolean = true;
-  noResultsMessage: string = 'The search has not returned any results';
+  googleMessage: string = 'The search has not returned any results';
+  iTunesMessage: string = 'The search has not returned any results';
 
   constructor(private formBuilder: FormBuilder, private restApi: RestApi) {
   }
@@ -32,6 +33,9 @@ export class SearchBarComponent implements OnInit {
       this.restApi.getResultsFromBackendGoogle(this.searchForm.value.searchInputFormControl).subscribe(
         data => {
           this.googleApiCallResults = data;
+        },
+        error => {
+          this.googleMessage = "Upstream Service responded with message:" + error.message;
         }
       )
     }
@@ -39,11 +43,13 @@ export class SearchBarComponent implements OnInit {
       this.restApi.getResultsFromBackendiTunes(this.searchForm.value.searchInputFormControl).subscribe(
         data => {
           this.iTunesApiCallResults = data;
+        },
+        error => {
+          this.iTunesMessage = "Upstream Service responded with message:" + error.message;
         }
       )
     }
   }
-
 
 }
 

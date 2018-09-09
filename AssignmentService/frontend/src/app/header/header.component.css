@@ -1,0 +1,13 @@
+.angular-logo {
+  margin: 0 4px 3px 0;
+  height: 35px;
+  vertical-align: middle;
+}
+
+.fill-remaining-space {
+  width: 100%;
+}
+
+.logoutButton {
+  background-color: darkslategray;
+}

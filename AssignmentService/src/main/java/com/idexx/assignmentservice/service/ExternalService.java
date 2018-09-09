@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.idexx.assignmentservice.model.ExternalResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +20,7 @@ public class ExternalService {
 
     private static final Gson gson = new Gson();
     private RestTemplate restTemplate = new RestTemplate();
+    private Logger logger = LoggerFactory.getLogger(ExternalService.class);
 
     @Value("${config.iTunes.maxNrOfResults}")
     private String maxNrOfResultsiTunes;
@@ -32,11 +35,12 @@ public class ExternalService {
     }
 
     public List<ExternalResponse> callGoogleAPI(String input) throws Exception {
+        long startTime = System.currentTimeMillis();
         List<ExternalResponse> responseList = new ArrayList<>();
         JsonObject googleJsonResponse = (new JsonParser()).parse(
                 Objects.requireNonNull(
                         restTemplate.getForObject(
-                                "https://www.googleapis.com/books/v1/volumes?q={input}&maxResults={maxResults}&apiKey=AIzaSyCoSNn5BTuoo8uYshKKvQtF5OUjMBD9Y0A",
+                                "https://www.xgoogleapis.com/books/v1/volumes?q={input}&maxResults={maxResults}",
                                 String.class, input, maxNrOfResultsGoogle
                         ))).getAsJsonObject();
 
@@ -67,11 +71,13 @@ public class ExternalService {
             }
         }
 
+        logger.info("Total elapsed time for Google Api Call in milliseconds: " + (System.currentTimeMillis() - startTime));
         return responseList;
     }
 
 
     public List<ExternalResponse> callItunesAPI(String input) throws Exception {
+        long startTime = System.currentTimeMillis();
         List<ExternalResponse> responseList = new ArrayList<>();
         JsonObject iTunesJsonResponse = (new JsonParser()).parse(
                 Objects.requireNonNull(restTemplate.getForObject(
@@ -91,7 +97,7 @@ public class ExternalService {
             response.setMediaSource("iTunes");
             responseList.add(response);
         }
-
+        logger.info("Total elapsed time for iTunes Api Call in milliseconds: " + (System.currentTimeMillis() - startTime));
         return responseList;
     }
 }

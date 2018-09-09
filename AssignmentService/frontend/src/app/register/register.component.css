@@ -1,0 +1,15 @@
+.registerFormField {
+  display: block;
+  width: 100%;
+}
+
+.container-card {
+  width: 20%;
+  margin: 0 auto !important;
+  text-align: center;
+}
+
+.container {
+  margin: 0 auto !important;
+  width: 800px;
+}
