@@ -40,7 +40,7 @@ public class ExternalService {
         JsonObject googleJsonResponse = (new JsonParser()).parse(
                 Objects.requireNonNull(
                         restTemplate.getForObject(
-                                "https://www.xgoogleapis.com/books/v1/volumes?q={input}&maxResults={maxResults}",
+                                "https://www.googleapis.com/books/v1/volumes?q={input}&maxResults={maxResults}",
                                 String.class, input, maxNrOfResultsGoogle
                         ))).getAsJsonObject();
 
